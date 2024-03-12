@@ -1,0 +1,8 @@
+\.idea
+*.exe
+*test*.c*
+input*.*
+\cmake*
+*.obj
+*.pdb
+\.vscode
