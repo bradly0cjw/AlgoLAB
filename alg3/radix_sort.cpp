@@ -47,9 +47,10 @@ void radix_sort_msb(int *A, int n, int r, int d) {
 
 int min_usable_digit(int *A, int n, int r) {
     int max = A[0];
-    for (int i = 1; i < n; ++i)
+    for (int i = 1; i < n; ++i) {
         if (A[i] > max)
             max = A[i];
+    }
     int count = 0;
     while (max > 0) {
         max /= r;
