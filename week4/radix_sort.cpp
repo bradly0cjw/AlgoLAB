@@ -70,7 +70,7 @@ int main() {
     int d = min_usable_digit(Arr, n, 10);
     cout << d << endl;
     radix_sort_lsb(Arr, n, 10, d);
-    Arr[] = {170, 45, 75, 74, 90, 802, 24, 2, 66};
-    radix_sort_msb(Arr, n, 10, d);//wrong answer
+    int Arr2[] = {170, 45, 75, 74, 90, 802, 24, 2, 66};
+    radix_sort_msb(Arr2, n, 10, d);//wrong answer
     return 0;
 }
