@@ -45,7 +45,7 @@ void radix_sort_msb(int *A, int n, int r, int d) {
     cout << endl;
 }
 
-int min_useable_digit(int *A, int n, int r) {
+int min_usable_digit(int *A, int n, int r) {
     int max = A[0];
     for (int i = 1; i < n; ++i)
         if (A[i] > max)
@@ -67,7 +67,7 @@ void print(int *A, int n) {
 int main() {
     int Arr[] = {170, 45, 75, 74, 90, 802, 24, 2, 66};
     int n = sizeof(Arr) / sizeof(Arr[0]);
-    int d = min_useable_digit(Arr, n, 10);
+    int d = min_usable_digit(Arr, n, 10);
     cout << d << endl;
     radix_sort_lsb(Arr, n, 10, d);
     Arr[] = {170, 45, 75, 74, 90, 802, 24, 2, 66};
