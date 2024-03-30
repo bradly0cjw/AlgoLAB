@@ -5,7 +5,6 @@ using namespace std;
 struct Node {
     bool filled;
     Node *children[4];
-    int depth;
 
     Node() : filled(false) {
         memset(children, 0, sizeof(children));
@@ -15,13 +14,12 @@ struct Node {
 string str;
 int counter;
 
-Node *draw(int &p, int depth = 0) {
+Node *draw(int &p) {
     Node *node = new Node();
-    node->depth = depth;
     char ch = str[p++];
     if (ch == 'p') {
         for (int i = 0; i < 4; i++) {
-            node->children[i] = draw(p, depth + 1);
+            node->children[i] = draw(p);
         }
     } else if (ch == 'f') {
         node->filled = true;
@@ -44,14 +42,14 @@ void merge(Node *a, Node *b) {
     }
 }
 
-int count(Node *node) {
+int count(Node *node, int s, int depth = 0) {
     if (!node) return 0;
     if (node->filled) {
-        return (pow(4, 15 - node->depth)); // 2^30 pixels
+        return (pow(4, s - depth));
     }
     int sum = 0;
     for (int i = 0; i < 4; i++) {
-        sum += count(node->children[i]);
+        sum += count(node->children[i], s, depth + 1);
     }
     return sum;
 }
@@ -68,7 +66,7 @@ int main() {
             root[j] = draw(p);
         }
         merge(root[0], root[1]);
-        cout << "There are " << count(root[0]) << " black pixels." << endl;
+        cout << "There are " << count(root[0], 15) << " black pixels." << endl;
         delete root[0], root[1];
     }
     return 0;
