@@ -5,7 +5,7 @@
 
 using namespace std;
 
-int LIS(vector<int> a) {
+vector<int> LIS(vector<int> a) {
     int len = a.size();
     vector<int> dp(len, 1);
     for (int i = 1; i < len; i++) {
@@ -15,12 +15,13 @@ int LIS(vector<int> a) {
             }
         }
     }
-    return *max_element(dp.begin(), dp.end());
+    return dp;
 }
 
 int main() {
-    int a, t, lis, lds;
+    int a, t;
     while (cin >> a) {
+        vector<int> lis, lds;
         vector<int> v;
         for (int i = 0; i < a; i++) {
             cin >> t;
@@ -33,7 +34,11 @@ int main() {
         lis = LIS(v);
         reverse(v.begin(), v.end());
         lds = LIS(v);
-        cout << min(lis, lds) * 2 - 1 << endl;
+        int ans = 0;
+        for (int i = 0; i < a; i++) {
+            ans = max(ans, min(lis[i], lds[a - i - 1]));
+        }
+        cout << 2 * ans - 1 << endl;
     }
     return 0;
 }
