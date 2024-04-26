@@ -12,7 +12,20 @@ int h(vector<int> a) {
     int r = len - 1;
     while (l < r) {
         int mid = (l + r) / 2;
-        if (a[mid] > a[mid + 1]) {
+        int count = 1;
+        bool flag = false;
+        for (int i = 1; i < a.size(); i++) {
+            if (a[i - 1] <= a[i]) {
+                count++;
+            } else {
+                count = 1;
+            }
+            if (count > mid) {
+                flag = true;
+                break;
+            }
+        }
+        if (!flag) {
             r = mid;
         } else {
             l = mid + 1;
@@ -20,6 +33,7 @@ int h(vector<int> a) {
     }
     return l;
 }
+
 
 int f(vector<int> a) {
     int len = a.size();
@@ -64,7 +78,8 @@ void show_lis(vector<int> a) {
 
 int main() {
     vector<int> a;
-    a = {1, 2, 3, 5, 4, 3, 6, 7, 2, 1};
+//    a = {1, 2, 3, 5, 4, 3, 6, 7, 2, 1};
+    a = {1, 2, 2, 6, 2, 2, 2, 2};
     cout << h(a) << endl;
     cout << f(a) << endl;
     show_lis(a);
