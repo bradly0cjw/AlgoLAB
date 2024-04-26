@@ -18,6 +18,7 @@ vector<int> LIS(vector<int> a) {
     return dp;
 }
 
+
 int main() {
     int a, t;
     while (cin >> a) {
