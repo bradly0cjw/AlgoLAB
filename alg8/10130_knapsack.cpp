@@ -4,40 +4,51 @@
 #include "bits/stdc++.h"
 
 using namespace std;
+#define out cout
+#define in cin
+
+void print_matrix(vector<vector<int>> &dp, ofstream &out) {
+    for (int i = 0; i < dp.size(); i++) {
+        for (int j = 0; j < dp[i].size(); j++)
+            out << dp[i][j] << " ";
+        out << endl;
+    }
+    out << endl;
+}
 
 int main() {
 //    ifstream in("./alg8/10130.in");
 //    ofstream out("./alg8/10130.out");
     int t;
-    cin >> t;
+    in >> t;
     while (t--) {
         int n;
-        cin >> n;
-        int w[1005], v[1005];
+        in >> n;
+        vector<int> w(n), v(n);
         for (int i = 0; i < n; i++)
-            cin >> v[i] >> w[i];
+            in >> v[i] >> w[i];
         int g;
-        cin >> g;
-        int mw[105];
+        in >> g;
+        vector<int> mw(g);
         for (int i = 0; i < g; i++)
-            cin >> mw[i];
-        int dp[1005][35] = {};
-        for (int i = 0; i < n; i++)
-            dp[i][0] = 0;
-        for (int i = 0; i < 35; i++)
+            in >> mw[i];
+        vector<vector<int>> dp(n, vector<int>(30, 0));
+        for (int i = 0; i < 30; i++)
             dp[0][i] = (w[0] <= i) ? v[0] : 0;
+//        print_matrix(dp, out);
         for (int i = 1; i < n; i++) {
-            for (int j = 1; j < 35; j++) {
+            for (int j = 1; j < 30; j++) {
                 if (w[i] > j)
                     dp[i][j] = dp[i - 1][j];
                 else
                     dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - w[i]] + v[i]);
             }
+//            print_matrix(dp, out);
         }
         int ans = 0;
         for (int i = 0; i < g; i++)
             ans += dp[n - 1][mw[i]];
-        cout << ans << endl;
+        out << ans << endl;
     }
     return 0;
 }
